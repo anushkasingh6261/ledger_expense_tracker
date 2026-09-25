@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ledger — Expense Tracker</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Ledger</h1>
+      <div class="tagline">A simple place to track where it goes.</div>
+    </div>
+    <div class="balance">
+      <div class="num" id="totalNum">$0.00</div>
+      <div class="lbl">spent this view · <button class="theme-toggle" id="themeBtn" type="button">theme</button></div>
+    </div>
+  </header>
+
+  <div class="grid">
+    <div class="card">
+      <h2>Add expense</h2>
+      <form id="addForm">
+        <div>
+          <label for="desc">Description</label>
+          <input id="desc" required placeholder="Coffee, rent, groceries…">
+        </div>
+        <div class="row2">
+          <div>
+            <label for="amount">Amount</label>
+            <input id="amount" type="number" step="0.01" min="0.01" required placeholder="0.00">
+          </div>
+          <div>
+            <label for="date">Date</label>
+            <input id="date" type="date" required>
+          </div>
+        </div>
+        <div>
+          <label for="category">Category</label>
+          <select id="category">
+            <option>Food</option><option>Transport</option><option>Housing</option>
+            <option>Utilities</option><option>Entertainment</option><option>Health</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <button class="primary" type="submit">Add expense</button>
+      </form>
+      <div class="chart-box"><canvas id="catChart"></canvas></div>
+      <div class="legend" id="legend"></div>
+    </div>
+
+    <div class="card">
+      <div class="toolbar">
+        <select id="filterCat"><option value="">All categories</option></select>
+        <select id="sortBy">
+          <option value="date-desc">Newest first</option>
+          <option value="date-asc">Oldest first</option>
+          <option value="amount-desc">Highest amount</option>
+          <option value="amount-asc">Lowest amount</option>
+        </select>
+      </div>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Date</th><th>Description</th><th>Category</th><th style="text-align:right">Amount</th><th></th></tr></thead>
+          <tbody id="rows"></tbody>
+        </table>
+        <div class="empty" id="emptyMsg" style="display:none">No expenses yet. Add your first one on the left.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="./script.js"></script>
+</body>
+</html>
