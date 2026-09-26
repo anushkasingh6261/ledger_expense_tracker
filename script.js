@@ -37,7 +37,7 @@ function render(){
   list.forEach(e=>{
     const tr = document.createElement('tr');
     tr.innerHTML = `<td>${e.date}</td><td>${escapeHtml(e.desc)}</td><td><span class="cat-tag">${e.category}</span></td>
-      <td class="amt">$${e.amount.toFixed(2)}</td><td><button class="del" data-id="${e.id}" title="Delete">✕</button></td>`;
+      <td class="amt">₹${e.amount.toFixed(2)}</td><td><button class="del" data-id="${e.id}" title="Delete">✕</button></td>`;
     rows.appendChild(tr);
   });
   rows.querySelectorAll('.del').forEach(btn=>{
@@ -48,7 +48,7 @@ function render(){
   });
 
   const total = list.reduce((s,e)=>s+e.amount,0);
-  document.getElementById('totalNum').textContent = '$' + total.toFixed(2);
+  document.getElementById('totalNum').textContent = '₹' + total.toFixed(2);
 
   const byCat = {};
   list.forEach(e=>{ byCat[e.category] = (byCat[e.category]||0) + e.amount; });
@@ -57,7 +57,7 @@ function render(){
   const colors = labels.map(l=>CAT_COLORS[CATS.indexOf(l)] || '#999');
 
   const legend = document.getElementById('legend');
-  legend.innerHTML = labels.length ? labels.map((l,i)=>`<span><span class="dot" style="background:${colors[i]}"></span>${l} — $${data[i].toFixed(2)}</span>`).join('') : '<span>No data yet</span>';
+  legend.innerHTML = labels.length ? labels.map((l,i)=>`<span><span class="dot" style="background:${colors[i]}"></span>${l} — ₹${data[i].toFixed(2)}</span>`).join('') : '<span>No data yet</span>';
 
   if(chart) chart.destroy();
   const ctx = document.getElementById('catChart').getContext('2d');
